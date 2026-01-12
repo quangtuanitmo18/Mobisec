@@ -9,7 +9,9 @@ Create an Android app that prints the string **`hello-world-mobisec-edition`** t
 The grading system launches the APK and checks the system log output.  
 To satisfy the requirement reliably, the log message is emitted at application startup inside the main Activity lifecycle method (`onCreate`). This guarantees the message is produced immediately when the app is started by the evaluator, without needing any user interaction.
 
-### Implementation (MainActivity)
+### Implementation
+
+**MainActivity**
 
 ```kotlin
 package com.example.helloworldmobisec
@@ -25,7 +27,6 @@ class MainActivity : Activity() {
     // Required output for the challenge
     Log.i("MOBISEC", "hello-world-mobisec-edition")
 
-    // No UI is needed
     finish()
   }
 }
@@ -492,7 +493,7 @@ The app acts as a small “hashing service” exposed through an activity:
    The app creates a result `Intent`, puts the computed hash under the `"hash"` key, sets `RESULT_OK`, and finishes.  
    The challenge framework compares this string to the expected value and, on success, prints the flag to Logcat.
 
-### Implementation (HashFileActivity)
+### Implementation
 
 **HashFileActivity**
 
@@ -738,9 +739,6 @@ We query the provider with a SQL-like selection `author=?` (with argument `reyam
 
 ### Implementation
 
-**Manifest**
-No special permissions are required; only a launcher activity is needed.
-
 **MainActivity**
 
 ```kotlin
@@ -815,8 +813,6 @@ When the service replies, it sends a `Message` with `what = 4` and includes a `B
 Finally, the app logs the flag with tag `MOBISEC` so the grading system can capture it.
 
 ### Implementation
-
-Only a launcher activity is required. On Android 11+, package visibility can block cross-app service resolution, so we declare a `<queries>` entry for the target package.
 
 **Manifest**
 
